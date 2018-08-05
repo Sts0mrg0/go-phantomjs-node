@@ -1,13 +1,13 @@
 package main
 
 import (
+	"io/ioutil"
+	"log"
 	"net/http"
 	"time"
-	"log"
-	"io/ioutil"
 )
 
-func initPing (server string, token string) {
+func initPing(server string, token string) {
 	ticker := time.NewTicker(time.Second * 10)
 	defer ticker.Stop()
 

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"net/http"
 	"log"
+	"net/http"
 )
 
 func index(tokenEnv string, w http.ResponseWriter, r *http.Request) {

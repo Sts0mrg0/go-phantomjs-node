@@ -1,0 +1,1 @@
+docker run --rm -p 6677:6677 -e "token=arkady" -e "server=192.168.1.67" node
