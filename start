@@ -1,1 +1,4 @@
 docker run --rm -p 6677:6677 -e "token=arkady" -e "server=192.168.1.67" node
+
+CGO_ENABLED=0 GOOS=linux go build -race -a -installsuffix cgo -o node .
+только с образом scratch

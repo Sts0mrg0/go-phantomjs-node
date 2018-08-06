@@ -17,7 +17,7 @@ func main() {
 	}
 	server := os.Getenv("server")
 
-	if token == "" {
+	if server == "" {
 		log.Fatalln("no env SERVER")
 		return
 	}
