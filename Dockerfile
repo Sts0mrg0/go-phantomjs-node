@@ -1,5 +1,7 @@
-FROM ubuntu:16.04
+FROM wernight/phantomjs:2.1.1
 WORKDIR /app
 EXPOSE 6677
 ADD node /app/
-CMD ["./node"]
+ADD entrypoint.sh /app/
+
+CMD ["bash", "entrypoint.sh"]
