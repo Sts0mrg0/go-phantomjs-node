@@ -34,7 +34,7 @@ func main() {
 	http.HandleFunc("/phantom", func(w http.ResponseWriter, r *http.Request) {
 		u, _ := url.Parse("http://127.0.0.1:4444")
 		tokenEnv := os.Getenv("token")
-		token := r.URL.Query().Get("token")
+		token := r.Header.Get("token")
 
 		if token != tokenEnv {
 			w.WriteHeader(400)

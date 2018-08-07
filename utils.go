@@ -9,25 +9,32 @@ import (
 
 func initPing(server string, token string) {
 	ticker := time.NewTicker(time.Second * 10)
+	var netClient = &http.Client{
+		Timeout: time.Second * 2,
+	}
 	defer ticker.Stop()
 
 	for range ticker.C {
-		var netClient = &http.Client{
-			Timeout: time.Second * 2,
-		}
-		resp, e := netClient.Get("http://" + server + ":8080/register?token=" + token)
+		req, err := http.NewRequest("GET", "http://"+server+":8080/register", nil)
 
-		if e != nil {
-			log.Println(e)
+		if err != nil {
+			log.Println(err)
 			continue
 		}
 
-		defer resp.Body.Close()
+		req.Header.Set("token", token)
+		resp, err := netClient.Do(req)
+
+		if err != nil {
+			log.Println(err)
+			continue
+		}
 
 		bodyByte, e := ioutil.ReadAll(resp.Body)
 
 		if e != nil {
 			log.Println(e)
+			resp.Body.Close()
 			return
 		}
 
@@ -38,5 +45,6 @@ func initPing(server string, token string) {
 		} else {
 			log.Printf("wrong answer from server, body: %s", body)
 		}
+		resp.Body.Close()
 	}
 }

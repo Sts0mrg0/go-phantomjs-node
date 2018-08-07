@@ -11,7 +11,7 @@ func index(tokenEnv string, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token := r.URL.Query().Get("token")
+	token := r.Header.Get("token")
 
 	if token != tokenEnv {
 		w.WriteHeader(400)
