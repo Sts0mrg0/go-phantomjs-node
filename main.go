@@ -26,13 +26,15 @@ func main() {
 
 	go initPing(server, token)
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("new request: %s", r.RemoteAddr)
+	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("new request %s: %s", r.RequestURI, r.RemoteAddr)
 		index(token, w, r)
 	})
 
-	http.HandleFunc("/phantom", func(w http.ResponseWriter, r *http.Request) {
-		u, _ := url.Parse("http://127.0.0.1:4444")
+	u, _ := url.Parse("http://127.0.0.1:4444")
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("new request %s: %s", r.RequestURI, r.RemoteAddr)
 		tokenEnv := os.Getenv("token")
 		token := r.Header.Get("token")
 
