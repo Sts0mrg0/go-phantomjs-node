@@ -11,15 +11,15 @@ func index(tokenEnv string, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token := r.Header.Get("token")
+	token := r.Header.Get(tokenKey)
 
 	if token != tokenEnv {
 		w.WriteHeader(400)
-		w.Write([]byte("bad token"))
-		log.Println("bad token")
+		w.Write([]byte(badToken))
+		log.Println(badToken)
 		return
 	}
 	w.WriteHeader(200)
-	w.Write([]byte("PONG"))
-	log.Println("PONG")
+	w.Write([]byte(pong))
+	log.Println(pong)
 }
